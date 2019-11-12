@@ -1,0 +1,173 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+:root, body{
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item {
+    width: 16%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #333;
+    align-items: center;
+    transition: height 0.5s linear 0.5s, width 0.5s linear;
+}
+.inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    transition: opacity .2s linear;
+    animation: move 1s linear forwards;
+    transform: translateY(100%);
+}
+.inner .bg {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 20px;
+    opacity: 0.4;
+    transition: opacity .2s linear;
+}
+
+.item:nth-of-type(1) .inner .bg {
+    background-image: url(../image/1.png);
+}
+.item:nth-of-type(2) .inner .bg {
+    background-image: url(../image/2.png);
+}
+.item:nth-of-type(3) .inner .bg {
+    background-image: url(../image/3.png);
+}
+.item:nth-of-type(4) .inner .bg {
+    background-image: url(../image/4.png);
+}
+.item:nth-of-type(5) .inner .bg {
+    background-image: url(../image/5.png);
+}
+.item:nth-of-type(6) .inner .bg {
+    background-image: url(../image/6.png);
+}
+
+.inner .title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity .2s linear 1s;
+}
+.inner .title h2 {
+    font-size: 16px;
+    color: #fff;
+}
+.item:hover .inner .bg{
+    opacity: 1;
+}
+.item:hover .title h2 {
+    font-size: 25px;
+    transition: font-size .2s linear;
+}
+@keyframes move{
+    0%{
+        transform: translateY(100%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+/* 图片延迟滚动 */
+.item:nth-of-type(2) .inner {
+    animation-delay: .1s;
+}
+.item:nth-of-type(3) .inner {
+    animation-delay: .2s;
+}
+.item:nth-of-type(4) .inner {
+    animation-delay: .3s;
+}
+.item:nth-of-type(5) .inner {
+    animation-delay: .4s;
+}
+.item:nth-of-type(6) .inner {
+    animation-delay: .5s;
+}
+.content .item.active {
+    width: 100%;
+}
+.wrapper-active .content .item:not(.active) {
+    width: 0%;
+    height: 0%;
+}
+.wrapper-active .item {
+    transition: height 0.5s linear, width 0.5s linear 0.5s;
+}
+/* 点击图片后，文字隐藏 */
+.wrapper-active .item .title {
+    opacity: 0;
+    transition: opacity .2s linear;
+}
+.content .direction {
+    position: absolute;
+    height: 30px;
+    top: 50px;
+    width: 100%;
+    opacity: 0;
+}
+.content .direction .header-title {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(236, 232, 232);
+    font-size: 24px;
+}
+.content .direction .close {
+    position: absolute;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.content .direction .close::after,
+.content .direction .close::before {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.content .direction .close::after {
+    transform: rotate(45deg);
+}
+.content .direction .close::before {
+    transform: rotate(-45deg);
+}
+.item.active .direction {
+    opacity: 1;
+    transition: all .2s linear 1s;
+}
+.item.active .direction .close {
+    transform: rotate(360deg);
+    transition: transform .5s linear 1s;
+}
